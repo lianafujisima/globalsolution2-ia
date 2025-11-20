@@ -1,4 +1,3 @@
-# Arquivo: app.py
 from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
@@ -48,7 +47,7 @@ def predict_risco_atraso():
         input_df = pd.DataFrame([data], columns=FEATURE_ORDER)
         prediction = MODELO_CLASSIFICACAO.predict(input_df)
         proba_atraso = MODELO_CLASSIFICACAO.predict_proba(input_df)[0][1]
-        risco_atraso = int(prediction[0]) # 0 ou 1
+        risco_atraso = int(prediction[0])
 
         if risco_atraso == 1:
             msg = f"ALERTA: Alto Risco de Atraso. Probabilidade de {round(proba_atraso*100, 2)}%."
