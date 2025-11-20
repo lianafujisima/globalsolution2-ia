@@ -16,117 +16,141 @@ Victor William Hwan Cho RM565382
 
 
         1.1. Visão Geral
-O projeto é um Sistema de Gestão Corporativa desenvolvido que utiliza o banco de dados para garantir o registro, a rastreabilidade e a persistência das informações.
-O objetivo primário do sistema é oferecer uma plataforma centralizada para a gestão de pessoas e processos, focando em dois pilares essenciais para o crescimento sustentável de qualquer organização: Produtividade Operacional e Bem-Estar do Colaborador. Em que tanto o colaborador como o administrador tem acesso às tarefas de maneira organizada e a relatórios com resultados das métricas.
+
+                O projeto é um Sistema de Gestão Corporativa desenvolvido que utiliza o banco de dados para garantir o registro, a rastreabilidade e a 
+        persistência das informações.
+                O objetivo primário do sistema é oferecer uma plataforma centralizada para a gestão de pessoas e processos, focando em dois pilares 
+        essenciais para o crescimento sustentável de qualquer organização: Produtividade Operacional e Bem-Estar do Colaborador. Em que tanto o 
+        colaborador como o administrador tem acesso às tarefas de maneira organizada e a relatórios com resultados das métricas.
 
         1.2. Funcionalidades
 
 
-Gestão de Colaboradores e Tarefas: o Administrador pode registrar funcionários e atribuir tarefas com níveis definidos de prioridade, dificuldade e prazo. O Colaborador pode visualizar e atualizar o status de suas tarefas.
-Métricas de Bem-Estar: os colaboradores preenchem diariamente métricas quantitativas e qualitativas sobre seu bem-estar como horas de sono, níveis de estresse, foco, satisfação, entre outros, que servem como dados comportamentais.
-Geração de Relatórios: o sistema gera relatórios diários e mensais que correlacionam o desempenho em tarefas com as métricas de bem-estar, fornecendo feedbacks e insights baseados em dados, e não apenas em percepções subjetivas.
+                Gestão de Colaboradores e Tarefas: o Administrador pode registrar funcionários e atribuir tarefas com níveis definidos de prioridade, 
+        dificuldade e prazo. O Colaborador pode visualizar e atualizar o status de suas tarefas.
+                Métricas de Bem-Estar: os colaboradores preenchem diariamente métricas quantitativas e qualitativas sobre seu bem-estar como horas de 
+        sono, níveis de estresse, foco, satisfação, entre outros, que servem como dados comportamentais.
+                Geração de Relatórios: o sistema gera relatórios diários e mensais que correlacionam o desempenho em tarefas com as métricas de 
+        bem-estar, fornecendo feedbacks e insights baseados em dados, e não apenas em percepções subjetivas.
 
 
 2. Implementação de IA
 
 
-        Inteligência Artificial proposta e desenvolvida visa transformar o sistema de gestão de dados em uma ferramenta preditiva e proativa, permitindo que os gestores e os colaboradores antecipem problemas e tomem decisões mais assertivas.
-Foram desenvolvidos dois modelos de Machine Learning que utilizam o histórico das tarefas e as métricas de bem-estar do colaborador como base de treinamento.
+                Inteligência Artificial proposta e desenvolvida visa transformar o sistema de gestão de dados em uma ferramenta preditiva e proativa, 
+        pemitindo que os gestores e os colaboradores antecipem problemas e tomem decisões mais assertivas. Foram desenvolvidos dois modelos de Machine 
+        Learning que utilizam o histórico das tarefas e as métricas de bem-estar do colaborador como base de treinamento.
+
         2.1. Modelo Regressão (Previsão de tempo de conclusão)
 
-
-        É um modelo de Regressão e tem como objetivo prever o tempo em dias que um colaborador levará para concluir uma nova tarefa. O modelo funciona, treinado com o algoritmo Random Forest Regressor, analisa a dificuldade da tarefa, a prioridade, e o histórico de desempenho e bem-estar do colaborador, como média de foco, horas produtivas e estresse. Com isso permite ao administrador definir prazos de entrega mais realistas e evitar a sobrecarga de trabalho, melhorando a gestão de recursos.
+                É um modelo de Regressão e tem como objetivo prever o tempo em dias que um colaborador levará para concluir uma nova tarefa. O modelo 
+        funciona, treinado com o algoritmo Random Forest Regressor, analisa a dificuldade da tarefa, a prioridade, e o histórico de desempenho 
+        e bem-estar do colaborador, como média de foco, horas produtivas e estresse. Com isso permite ao administrador definir prazos de entrega mais 
+        realistas e evitar a sobrecarga de trabalho, melhorando a gestão de recursos.
 
 
         2.2. Modelo Classificação (Predição de risco de atraso)
 
 
-        É um modelo de Classificação binária ou seja 0 = no prazo e 1= com atraso. O objetivo é classificar se uma tarefa tem alto ou baixo risco de atraso antes que ela comece. O modelo utilizado foi o Random Forest Classifier, ele identifica padrões de features (alta dificuldade + alto estresse + baixa satisfação) que historicamente resultaram em atrasos. Permitindo a emissão de alertas preventivos, possibilitando que o gestor intervenha precocemente, redistribua o trabalho ou verifique as condições do colaborador.
+                É um modelo de Classificação binária ou seja 0 = no prazo e 1= com atraso. O objetivo é classificar se uma tarefa tem alto ou baixo risco 
+        de atraso antes que ela comece. O modelo utilizado foi o Random Forest Classifier, ele identifica padrões de features (alta dificuldade + alto 
+        estresse + baixa satisfação) que historicamente resultaram em atrasos. Permitindo a emissão de alertas preventivos, possibilitando que o gestor 
+        intervenha precocemente, redistribua o trabalho ou verifique as condições do colaborador.
 
 
         2.3. Integração e Implementação (API REST)
 
 
-        Para que a inteligência gerada seja acessível por qualquer sistema, a solução de IA foi encapsulada em uma API RESTful. Foi utilizado o Flask que carrega os dois modelos pré treinados os arquivos .joblib e disponibiliza endpoints específicos: ‘/predict/tempo_conclusao’ e ‘/predict/risco_atraso'. Com isso permite que o sistema de gestão solicite previsões em tempo real através de requisições HTTP (usamos o Postman para os testes),  garantindo uma solução escalável e de uso prático.
+                Para que a inteligência gerada seja acessível por qualquer sistema, a solução de IA foi encapsulada em uma API RESTful. Foi utilizado o Flask que 
+        carrega os dois modelos pré treinados os arquivos .joblib e disponibiliza endpoints específicos: ‘/predict/tempo_conclusao’ e ‘/predict/risco_atraso'. 
+        Com isso permite que o sistema de gestão solicite previsões em tempo real através de requisições HTTP (usamos o Postman para os testes),  garantindo 
+        uma solução escalável e de uso prático.
 
 
         2.4. Como testar a API
 
 
-        Para conseguir testar o projeto, as previsões devem ser testadas através de endpoints da API REST utilizando o Postman por exemplo. Vou apresentar em passos o que fazer para testar este projeto utilizando o Postman, os passos apresentados neste item devem ser feitos para testar tanto a de Regressão como de Classificação e os próximos serão apresentados nos itens 2.4.1 e 2.4.2.
+                Para conseguir testar o projeto, as previsões devem ser testadas através de endpoints da API REST utilizando o Postman por exemplo. Vou apresentar 
+        em passos o que fazer para testar este projeto utilizando o Postman, os passos apresentados neste item devem ser feitos para testar tanto a de Regressão 
+        como de Classificação e os próximos serão apresentados nos itens 2.4.1 e 2.4.2.
 
 
-1. Servidor Flask - app.py deve estar ativo e rodando na porta 5000, não fechar enquanto estiver testando.
-2. Abrir o Postman.
-3. Abrir uma nova requisição.
-4. Escolher o método POST.
-5. No body - selecionar campo RAW e JSON.
+        1. Servidor Flask - app.py deve estar ativo e rodando na porta 5000, não fechar enquanto estiver testando.
+        2. Abrir o Postman.
+        3. Abrir uma nova requisição.
+        4. Escolher o método POST.
+        5. No body - selecionar campo RAW e JSON.
 
 
              2.4.1. Previsão de Tempo de Conclusão (Regressão)
 
-6. Inserir no campo endereço:  http://127.0.0.1:5000/predict/tempo_conclusao
-7. Colocar no body o objeto de dados a ser previsto. Dois exemplo para teste em JSON:
-{
-    "PRIORIDADE": "média",
-    "DIFICULDADE": 7.0,
-    "HORAS_PROD_MED": 6.5,
-    "NIVEL_FOCO_MED": 7.8,
-    "ESTRESSE_MED": 4.5,
-    "HORAS_DORMIDAS_MED": 7.5,
-    "SATISFACAO_MED": 8.0,
-    "CARGA_TRABALHO_MED": 6.0
-}
+        6. Inserir no campo endereço:  http://127.0.0.1:5000/predict/tempo_conclusao
+        7. Colocar no body o objeto de dados a ser previsto. Dois exemplo para teste em JSON:
+        {
+        "PRIORIDADE": "média",
+        "DIFICULDADE": 7.0,
+        "HORAS_PROD_MED": 6.5,
+        "NIVEL_FOCO_MED": 7.8,
+        "ESTRESSE_MED": 4.5,
+        "HORAS_DORMIDAS_MED": 7.5,
+        "SATISFACAO_MED": 8.0,
+        "CARGA_TRABALHO_MED": 6.0
+        }
 
-{
-   "PRIORIDADE": "alta",
-   "DIFICULDADE": 9.5,  
-   "HORAS_PROD_MED": 4.0,
-   "NIVEL_FOCO_MED": 3.0,
-   "ESTRESSE_MED": 9.0,  
-   "HORAS_DORMIDAS_MED": 5.5,
-   "SATISFACAO_MED": 3.5,
-   "CARGA_TRABALHO_MED": 8.5
-}
+        {
+        "PRIORIDADE": "alta",
+        "DIFICULDADE": 9.5,  
+        "HORAS_PROD_MED": 4.0,
+        "NIVEL_FOCO_MED": 3.0,
+        "ESTRESSE_MED": 9.0,  
+        "HORAS_DORMIDAS_MED": 5.5,
+        "SATISFACAO_MED": 3.5,
+        "CARGA_TRABALHO_MED": 8.5
+        }
 
-8. Apertar SEND.
+        8. Apertar SEND.
 
 
             2.4.2. Previsão de Risco de Atraso (Classificação)
 
 
-6. Inserir no campo endereço: http://127.0.0.1:5000/predict/risco_atraso 
-7. Colocar no body o objeto de dados a ser previsto. Dois exemplos para teste em JSON:
-{
-    "PRIORIDADE": "média",
-    "DIFICULDADE": 7.0,
-    "HORAS_PROD_MED": 6.5,
-    "NIVEL_FOCO_MED": 7.8,
-    "ESTRESSE_MED": 4.5,
-    "HORAS_DORMIDAS_MED": 7.5,
-    "SATISFACAO_MED": 8.0,
-    "CARGA_TRABALHO_MED": 6.0
-}
+        6. Inserir no campo endereço: http://127.0.0.1:5000/predict/risco_atraso 
+        7. Colocar no body o objeto de dados a ser previsto. Dois exemplos para teste em JSON:
+        {
+        "PRIORIDADE": "média",
+        "DIFICULDADE": 7.0,
+        "HORAS_PROD_MED": 6.5,
+        "NIVEL_FOCO_MED": 7.8,
+        "ESTRESSE_MED": 4.5,
+        "HORAS_DORMIDAS_MED": 7.5,
+        "SATISFACAO_MED": 8.0,
+        "CARGA_TRABALHO_MED": 6.0
+        }
 
-{
-   "PRIORIDADE": "alta",
-   "DIFICULDADE": 9.5,  
-   "HORAS_PROD_MED": 4.0,
-   "NIVEL_FOCO_MED": 3.0,
-   "ESTRESSE_MED": 9.0,  
-   "HORAS_DORMIDAS_MED": 5.5,
-   "SATISFACAO_MED": 3.5,
-   "CARGA_TRABALHO_MED": 8.5
-}
+        {
+        "PRIORIDADE": "alta",
+        "DIFICULDADE": 9.5,  
+        "HORAS_PROD_MED": 4.0,
+        "NIVEL_FOCO_MED": 3.0,
+        "ESTRESSE_MED": 9.0,  
+        "HORAS_DORMIDAS_MED": 5.5,
+        "SATISFACAO_MED": 3.5,
+        "CARGA_TRABALHO_MED": 8.5
+        }
 
-8. Apertar SEND.
+        8. Apertar SEND.
 
 
 3. Link Repositório Github
 
-
-
+        https://github.com/lianafujisima/globalsolution2-ia
 
 4. Considerações finais
-Em resumo, o projeto transforma a gestão de desempenho para algo preditivo, unindo dados operacionais e comportamentais para promover tanto a eficiência organizacional quanto o bem-estar individual dos colaboradores.
-A integração dos modelos de Regressão e Classificação através da API RESTful em Flask garante que a inteligência gerada seja acessível em tempo real, permitindo a tomada de decisão proativa. O sistema não apenas organiza tarefas e coleta métricas de bem-estar, mas agora atua como um assistente estratégico, alertando gestores sobre potenciais riscos de atraso e fornecendo estimativas de tempo realistas. Desta forma, o projeto estabelece uma base tecnológica sólida para o futuro da gestão de capital humano, focada na prevenção de problemas e no desenvolvimento sustentável da equipe.
+
+                Em resumo, o projeto transforma a gestão de desempenho para algo preditivo, unindo dados operacionais e comportamentais para promover 
+        tanto a eficiência organizacional quanto o bem-estar individual dos colaboradores.
+                A integração dos modelos de Regressão e Classificação através da API RESTful em Flask garante que a inteligência gerada seja acessível 
+        em tempo real, permitindo a tomada de decisão proativa. O sistema não apenas organiza tarefas e coleta métricas de bem-estar, mas agora 
+        atua como um assistente estratégico, alertando gestores sobre potenciais riscos de atraso e fornecendo estimativas de tempo realistas. 
+                Desta forma, o projeto estabelece uma base tecnológica sólida para o futuro da gestão de capital humano, focada na prevenção de problemas 
+        e no desenvolvimento sustentável da equipe.
